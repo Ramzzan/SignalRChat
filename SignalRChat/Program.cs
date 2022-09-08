@@ -1,10 +1,12 @@
+using SignalRChat;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
-
+builder.Services.AddSignalR();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -21,5 +23,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
+app.MapHub<ChatHub>("/chatHub")
+    ;
 app.Run();
